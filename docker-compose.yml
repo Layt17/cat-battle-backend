@@ -1,0 +1,25 @@
+version: "3.0"
+
+services:
+  app:
+    image: node:12
+    working_dir: /app
+    command: npm run start:dev
+    volumes:
+      - ${PWD:-./}:/app
+    ports:
+      - 3000:3000
+       
+  db:
+    image: "mariadb:10.5"
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+
+volumes:
+  dbdata:
+  
